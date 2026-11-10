@@ -1,0 +1,25 @@
+version: 2
+# No registries: Dependabot uses the public npm registry, which works only while
+# yarn.lock records no download URLs (see .ado/README.md).
+# Keep the existing 8-day cooldown aligned with npmMinimalAgeGate in .yarnrc.yml.
+updates:
+# main branch - all dependency updates (minor + patch), daily
+- package-ecosystem: npm
+  directory: "/"
+  target-branch: "main"
+  cooldown:
+    default-days: 8
+  groups:
+    all-dependencies:
+      patterns:
+        - '*'
+  schedule:
+    interval: daily
+    time: "05:00"
+    timezone: "America/Los_Angeles"
+  labels:
+  - dependencies
+  versioning-strategy: lockfile-only
+  commit-message:
+    prefix: "📦 [main]"
+  open-pull-requests-limit: 8
